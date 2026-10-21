@@ -24,5 +24,7 @@ The program was tested in VS Code and successfully generated routes, calculated 
 2. Clone or download this repository.
 3. Open the project folder in VS Code.
 4. Run the following command in the terminal:
+Open the terminal and navigate to the project folder:
 
-`python genetic_algorithm.py`
+cd Genetic-algorithm
+python genetic_algorithm.py
