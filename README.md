@@ -1,30 +1,52 @@
-# CSE 3500 — Genetic Algorithm for TSP
+# Genetic Algorithm for the Traveling Salesman Problem
 
-A Python standard-library implementation of a genetic algorithm for the Euclidean Traveling Salesman Problem. Routes are permutations of city indices and return to their starting city.
+**CSE 3500 — Algorithms and Complexity**
 
-## Run
+## Overview
 
-```powershell
-python genetic_algorithm.py
-python genetic_algorithm.py --cities 20 --population 100 --generations 500 --mutation 0.1 --seed 3500 --output results20.csv
+This project implements a Genetic Algorithm (GA) in Python to solve the Traveling Salesman Problem (TSP). The goal is to find a short route that visits every city exactly once and returns to the starting point.
+
+The algorithm uses tournament selection, ordered crossover, swap mutation, and elitism to improve routes over multiple generations.
+
+## Project Files
+
+- `genetic_algorithm.py` — Main Genetic Algorithm implementation
+- `visualize.py` — Animated visualization of the algorithm
+- `test_genetic_algorithm.py` — Unit tests
+- `results.csv` — Generated results from running the algorithm
+
+## How to Run
+
+**1. Run the Genetic Algorithm**
+
+```bash
+python genetic_algorithm.py --cities 30 --population 100 --generations 500
+```
+
+**2. Run the visualization**
+
+Install dependencies:
+
+```bash
+python -m pip install matplotlib pillow
+```
+
+Then run:
+
+```bash
+python visualize.py --cities 30 --population 100 --generations 500
+```
+
+**3. Run the tests**
+
+```bash
 python -m unittest -v
 ```
 
-The script prints initial and final best route distances and writes `generation,best_distance` to a CSV file. Plot this CSV in Excel (generation on X, best distance on Y) for the final report. Python 3.10+; no external dependencies.
+## Results
 
-## How it works
+In our experiments, the algorithm improved the best initial route by approximately 19%–68% across problems containing 10–50 cities.
 
-1. Create random valid tours (initial population).
-2. Score each tour by total Euclidean length, including return to start.
-3. Select parents with size-3 tournament selection.
-4. Produce valid child permutations using ordered crossover (OX).
-5. Apply random swap mutation at the specified per-child probability.
-6. Preserve the best-so-far route (elitism), then repeat for the specified number of generations.
+The program outputs the shortest route found, its total distance, and the percentage improvement. It also saves generation-by-generation results to `results.csv`.
 
-## Complexity
-
-For `n` cities, `P` population size, `G` generations, and fixed tournament size, route scoring costs O(n), OX costs O(n), and one generation costs O(Pn). Total time is O(GPn) (plus initial population work); population storage is O(Pn), and history is O(G). These bounds describe computational work for fixed G, not guaranteed convergence or global optimality.
-
-## Notes
-
-Genetic algorithms are randomized heuristics. They do not guarantee the optimal tour. A fixed seed makes runs reproducible. Compare multiple seeds, city counts, and mutation rates; avoid drawing conclusions from one run. For the six fixed cities, compare with brute force if desired.
+The Genetic Algorithm searches for good solutions but does not guarantee the mathematically optimal route.
